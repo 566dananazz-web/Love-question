@@ -1,0 +1,136 @@
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لعبة أسئلتنا ❤️</title>
+<style>
+body {
+ background:#68132f;
+ color:white;
+ font-family:Arial;
+ text-align:center;
+ padding:20px;
+}
+h1 {margin:30px 0;color:#ffe0eb}
+.grid {
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:12px;
+ max-width:500px;
+ margin:30px auto;
+}
+button {
+ padding:18px 5px;
+ border:2px solid #e8b7c8;
+ border-radius:14px;
+ background:#fff5f8;
+ color:#68132f;
+ font-size:22px;
+ font-weight:bold;
+}
+#box {
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#300817ee;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.card {
+ background:#fff5f8;
+ color:#68132f;
+ border-radius:20px;
+ padding:30px;
+ max-width:400px;
+}
+#question {font-size:25px;line-height:1.8}
+</style>
+</head>
+<body>
+<h1>اختار رقم واسأل ❤️</h1>
+<p>كل واحد يختار رقم ويجاوب بصراحة</p>
+<div class="grid" id="numbers"></div>
+
+<div id="box">
+ <div class="card">
+  <h3 id="num"></h3>
+  <p id="question"></p>
+  <button onclick="closeBox()">رجوع للأرقام</button>
+ </div>
+</div>
+
+<script>
+const questions = [
+"وش أكثر شيء تحبه فيني؟",
+"متى أول مرة اشتقت لي؟",
+"وش أكثر موقف بيننا ما تنساه؟",
+"وش أكثر صفة تعجبك فيني؟",
+"لو توصف علاقتنا بثلاث كلمات؟",
+"وش أكثر شيء يضحكك فيني؟",
+"متى تشتاق لي أكثر؟",
+"وش أغنية تذكرك فيني؟",
+"وش أجمل رسالة وصلتك مني؟",
+"لو نعيد يوم مع بعض، وش تختار؟",
+"وش حركة مني تسعدك؟",
+"وش اللقب اللي تحب أناديك فيه؟",
+"وش كان أول انطباع عني؟",
+"وش تتمنى نسوي سوا؟",
+"وين تتمنى نسافر مع بعض؟",
+"وش أكلة ودك نجربها؟",
+"وش تفصيل صغير تلاحظه فيني؟",
+"متى تحس إني أفهمك بدون كلام؟",
+"وش يخليك تحس إنك مميز عندي؟",
+"وش ذكرى تتمنى تتكرر؟",
+"لو تهديني هدية، وش بتكون؟",
+"وش أكثر شيء يطمنك بعلاقتنا؟",
+"وش أكثر حركة لطيفة تحبها مني؟",
+"وش موضوع تحب تسولف معي عنه؟",
+"لو علاقتنا فيلم وش اسمه؟",
+"وش ودك أعرف عنك أكثر؟",
+"متى آخر مرة ابتسمت بسبب رسالة مني؟",
+"وش أكثر شيء يعجبك بأسلوبي؟",
+"وش الموعد المثالي بالنسبة لك؟",
+"مكالمة طويلة أو رسائل طول اليوم؟",
+"وش نسوي بيوم ممطر؟",
+"كيف تقضي يوم كامل معي؟",
+"وش مجاملة تحب تسمعها مني؟",
+"وش الشيء اللي يخليك تغار؟",
+"كيف تحب أصالحك إذا زعلت؟",
+"وش أهم شيء نحافظ عليه؟",
+"وش تتمنى ما يتغير بيننا؟",
+"وش صورة تمثل علاقتنا؟",
+"متى حسيت إني قريبة من قلبك؟",
+"وش تحب تسمع مني قبل النوم؟",
+"وش تجربة جديدة ودك نجربها؟",
+"اكتب لي رسالة من سطر واحد.",
+"وش عادة لطيفة تتمنى تصير بيننا؟",
+"وش يميز وقتنا مع بعض؟",
+"متى تحتاج تسمع صوتي؟",
+"وش يعجبك بطريقة تفكيري؟",
+"وش تقليد خاص نسويه سوا؟",
+"وش سؤال تتمنى أسألك إياه؟",
+"وش وعد تتمنى نوعد بعض فيه؟",
+"وش شيء بقلبك ما قلته لي؟"
+];
+
+const grid=document.getElementById("numbers");
+
+questions.forEach((q,i)=>{
+ let b=document.createElement("button");
+ b.textContent=i+1;
+ b.onclick=()=>{
+ document.getElementById("num").textContent="السؤال رقم "+(i+1);
+ document.getElementById("question").textContent=q;
+ document.getElementById("box").style.display="flex";
+ };
+ grid.appendChild(b);
+});
+
+function closeBox(){
+ document.getElementById("box").style.display="none";
+}
+</script>
+</body>
+</html>
