@@ -1,136 +1,237 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>لعبة أسئلتنا ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QUESTION ❤️</title>
+
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
- background:#68132f;
- color:white;
- font-family:Arial;
- text-align:center;
- padding:20px;
+  margin: 0;
+  background: #68132f;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
 }
-h1 {margin:30px 0;color:#ffe0eb}
+
+h1 {
+  font-size: 38px;
+  letter-spacing: 4px;
+  margin-top: 35px;
+  color: #ffe0eb;
+}
+
+.subtitle {
+  color: #f2c4d4;
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+
 .grid {
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:12px;
- max-width:500px;
- margin:30px auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  max-width: 500px;
+  margin: 25px auto;
 }
+
 button {
- padding:18px 5px;
- border:2px solid #e8b7c8;
- border-radius:14px;
- background:#fff5f8;
- color:#68132f;
- font-size:22px;
- font-weight:bold;
+  cursor: pointer;
+  border: 2px solid #e8b7c8;
+  border-radius: 14px;
+  background: #fff5f8;
+  color: #68132f;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 18px 5px;
 }
+
+button.used {
+  text-decoration: line-through;
+  opacity: 0.35;
+  background: #d9aaba;
+}
+
 #box {
- display:none;
- position:fixed;
- inset:0;
- background:#300817ee;
- align-items:center;
- justify-content:center;
- padding:20px;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #300817ee;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
+
 .card {
- background:#fff5f8;
- color:#68132f;
- border-radius:20px;
- padding:30px;
- max-width:400px;
+  background: #fff5f8;
+  color: #68132f;
+  border-radius: 22px;
+  padding: 30px 22px;
+  width: 100%;
+  max-width: 420px;
+  border: 2px solid #e8b7c8;
 }
-#question {font-size:25px;line-height:1.8}
+
+.card h2 {
+  font-size: 18px;
+  color: #a45a75;
+}
+
+#question {
+  font-size: 25px;
+  line-height: 1.9;
+  margin: 25px 0;
+}
+
+.close {
+  background: #68132f;
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  font-size: 17px;
+}
+
+.footer {
+  margin-top: 35px;
+  color: #e8b7c8;
+  font-size: 13px;
+}
+
+@media(max-width:400px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 </style>
 </head>
+
 <body>
-<h1>اختار رقم واسأل ❤️</h1>
-<p>كل واحد يختار رقم ويجاوب بصراحة</p>
+
+<h1>QUESTION</h1>
+
+<p class="subtitle">
+اختاروا رقم واكتشفوا السؤال ❤️
+</p>
+
 <div class="grid" id="numbers"></div>
 
+<p class="footer">50 QUESTIONS • JUST FOR TWO ❤️</p>
+
 <div id="box">
- <div class="card">
-  <h3 id="num"></h3>
-  <p id="question"></p>
-  <button onclick="closeBox()">رجوع للأرقام</button>
- </div>
+  <div class="card">
+    <h2 id="num"></h2>
+    <p id="question"></p>
+    <button class="close" onclick="closeBox()">
+      رجوع للأرقام
+    </button>
+  </div>
 </div>
 
 <script>
+
 const questions = [
+
 "وش أكثر شيء تحبه فيني؟",
-"متى أول مرة اشتقت لي؟",
-"وش أكثر موقف بيننا ما تنساه؟",
-"وش أكثر صفة تعجبك فيني؟",
-"لو توصف علاقتنا بثلاث كلمات؟",
+"متى أول مرة حسيت إنك معجب فيني؟",
+"وش أكثر موقف بيننا مستحيل تنساه؟",
+"وش أكثر صفة تجذبك فيني؟",
+"لو توصفني بثلاث كلمات، وش بتقول؟",
 "وش أكثر شيء يضحكك فيني؟",
 "متى تشتاق لي أكثر؟",
-"وش أغنية تذكرك فيني؟",
+"وش الأغنية اللي تذكرك فيني؟",
 "وش أجمل رسالة وصلتك مني؟",
-"لو نعيد يوم مع بعض، وش تختار؟",
-"وش حركة مني تسعدك؟",
+"لو نعيد يوم واحد مع بعض، أي يوم تختار؟",
+
+"وش الشيء اللي أسويه ويخليك تبتسم؟",
 "وش اللقب اللي تحب أناديك فيه؟",
-"وش كان أول انطباع عني؟",
-"وش تتمنى نسوي سوا؟",
+"وش كان أول انطباع أخذته عني؟",
+"وش أكثر شيء تتمنى نسويه سوا؟",
 "وين تتمنى نسافر مع بعض؟",
-"وش أكلة ودك نجربها؟",
-"وش تفصيل صغير تلاحظه فيني؟",
+"وش أكثر تفصيل صغير تلاحظه فيني؟",
 "متى تحس إني أفهمك بدون كلام؟",
-"وش يخليك تحس إنك مميز عندي؟",
+"وش الشيء اللي يخليك تحس إنك مميز عندي؟",
 "وش ذكرى تتمنى تتكرر؟",
-"لو تهديني هدية، وش بتكون؟",
 "وش أكثر شيء يطمنك بعلاقتنا؟",
+
 "وش أكثر حركة لطيفة تحبها مني؟",
-"وش موضوع تحب تسولف معي عنه؟",
-"لو علاقتنا فيلم وش اسمه؟",
+"وش أكثر شيء يجذبك في شخصيتي؟",
+"لو علاقتنا فيلم، وش بيكون اسمه؟",
 "وش ودك أعرف عنك أكثر؟",
 "متى آخر مرة ابتسمت بسبب رسالة مني؟",
 "وش أكثر شيء يعجبك بأسلوبي؟",
 "وش الموعد المثالي بالنسبة لك؟",
-"مكالمة طويلة أو رسائل طول اليوم؟",
-"وش نسوي بيوم ممطر؟",
-"كيف تقضي يوم كامل معي؟",
-"وش مجاملة تحب تسمعها مني؟",
-"وش الشيء اللي يخليك تغار؟",
+"تفضل مكالمة طويلة أو رسائل طول اليوم؟",
+"وش الشيء اللي يخليك تغار علي؟",
 "كيف تحب أصالحك إذا زعلت؟",
-"وش أهم شيء نحافظ عليه؟",
-"وش تتمنى ما يتغير بيننا؟",
-"وش صورة تمثل علاقتنا؟",
-"متى حسيت إني قريبة من قلبك؟",
-"وش تحب تسمع مني قبل النوم؟",
-"وش تجربة جديدة ودك نجربها؟",
-"اكتب لي رسالة من سطر واحد.",
-"وش عادة لطيفة تتمنى تصير بيننا؟",
-"وش يميز وقتنا مع بعض؟",
-"متى تحتاج تسمع صوتي؟",
-"وش يعجبك بطريقة تفكيري؟",
-"وش تقليد خاص نسويه سوا؟",
-"وش سؤال تتمنى أسألك إياه؟",
+
+"وش أكثر شيء تحب تسمعه مني؟",
+"وش الشيء اللي تتمنى ما يتغير بيننا؟",
+"وش موقف خلاك تحس إني قريبة من قلبك؟",
+"هل تحب المفاجآت الرومانسية؟",
+"وش أكثر شيء يلفت انتباهك في نظراتي؟",
+"وش أكثر كلمة تحب أقولها لك؟",
+"هل سبق وابتسمت وأنت تقرأ محادثتنا؟",
+"وش أكثر شيء يخليك تشتاق لصوتي؟",
+"لو قضينا يوم كامل سوا، كيف بتخطط له؟",
+"وش أكثر لحظة تحبها بيننا؟",
+
+"وش الشيء اللي تتمنى نجربه لأول مرة سوا؟",
+"وش أكثر شيء يميزني عن غيري؟",
+"هل تحب الغزل المباشر أو التلميحات؟",
+"وش أكثر شيء يحرجك لما أقوله لك؟",
+"لو كتبت لي رسالة من سطر واحد، وش بتكتب؟",
+"وش الشيء اللي تتمنى أسألك عنه؟",
+"وش أكثر شيء تحب في طريقة اهتمامي فيك؟",
 "وش وعد تتمنى نوعد بعض فيه؟",
-"وش شيء بقلبك ما قلته لي؟"
+"وش اعتراف ما سبق وقلته لي؟",
+"بعد كل هالأسئلة، وش ودك تقول لي؟"
+
 ];
 
-const grid=document.getElementById("numbers");
+const grid = document.getElementById("numbers");
 
-questions.forEach((q,i)=>{
- let b=document.createElement("button");
- b.textContent=i+1;
- b.onclick=()=>{
- document.getElementById("num").textContent="السؤال رقم "+(i+1);
- document.getElementById("question").textContent=q;
- document.getElementById("box").style.display="flex";
- };
- grid.appendChild(b);
+questions.forEach((q, i) => {
+
+  let b = document.createElement("button");
+
+  b.textContent = i + 1;
+
+  if (localStorage.getItem("used" + i)) {
+    b.classList.add("used");
+  }
+
+  b.onclick = () => {
+
+    if (b.classList.contains("used")) return;
+
+    b.classList.add("used");
+
+    localStorage.setItem("used" + i, "yes");
+
+    document.getElementById("num").textContent =
+      "QUESTION " + (i + 1) + " ❤️";
+
+    document.getElementById("question").textContent = q;
+
+    document.getElementById("box").style.display = "flex";
+
+  };
+
+  grid.appendChild(b);
+
 });
 
-function closeBox(){
- document.getElementById("box").style.display="none";
+function closeBox() {
+  document.getElementById("box").style.display = "none";
 }
+
 </script>
+
 </body>
 </html>
